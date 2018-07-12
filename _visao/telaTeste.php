@@ -1,0 +1,1 @@
+<?php $_SESSION['idCampeonato'];?>jogadores Criados

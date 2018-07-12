@@ -1,7 +1,8 @@
 <?php
 
 class InicioControle extends ControladorVisao {
-
+    
+    //Caso o usuário já esteja logado, ir pra tela de carregamento
     public function index() {
         
         if(empty($_SESSION['login'])){
@@ -12,10 +13,12 @@ class InicioControle extends ControladorVisao {
         }
     }
     
+    //Tela para cadastro de novo usuário
     public function cadastroUsuario(){
         $this->loadTemplate('cadastroUsuario');
     }
     
+    //Função cadastrar usuário
     public function cadastrarUsuario(){
        
         $usuarioDAO = new UsuarioDAO();
@@ -54,6 +57,7 @@ class InicioControle extends ControladorVisao {
         }
     }
     
+    //Função para validar dados inseridos pelo usuário no login
     public function validaLogon(){
         
         $usuarioDAO = new UsuarioDAO();
@@ -65,13 +69,15 @@ class InicioControle extends ControladorVisao {
         
         if($usuarioDAO->verificaLogon($usuario)){
             
-            $this->loadTemplate('carregamento');
+            $campeonatoControle = new CampeonatoControle();
+            $campeonatoControle->carregarJogosSalvos();
         }
         else{
             echo "senha errada";
         }
     }
     
+    //Função para desativar sessão, e voltar a tela de login
     public function deslogar(){
         
         session_unset();

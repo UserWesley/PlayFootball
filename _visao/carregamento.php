@@ -1,9 +1,16 @@
 <h1>Carregamento</h1>
 <p>
-<a href="">Novo Campeonato</a> <p>
-Carregar Campeonato<br>
+<a href="<?php echo BASE_URL; ?>CampeonatoControle/">Novo Campeonato</a>
+<p>
+
+Jogos Salvos
 <select>
-<option>Teste</option>
-<option>Teste2</option>
-<option>Teste3</option>
+ 
+<?php 
+
+foreach($viewData as $key => $value){
+    echo '<option value="'.$viewData['key'].'">'.$value.'</option>'; 
+} ?>
 </select>
+
+<button type="button">Carregar Jogo Selecionado</button>						

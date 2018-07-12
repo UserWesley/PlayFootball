@@ -1,4 +1,5 @@
 <?php
+
 class model {
 
 	protected $banco;

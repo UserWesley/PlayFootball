@@ -1,11 +1,13 @@
 <?php
 
+//Classe que represente a entidade usuario, quando existem operações com o banco de dados
 class UsuarioDAO extends model{
     
     public function __construct(){
         parent::__construct();
     }
     
+    //Função que obtem dados dos usuario
     public function get($campos = array(), $where=array()){
         $usuarios = array();
         $valores = array();
@@ -40,37 +42,7 @@ class UsuarioDAO extends model{
         return $usuarios;
     }
     
-    public function insert (Usuario $usuario){
-        $usuarios = array(
-            'nome'=>$usuario->getNome(),
-            'sobrenome'=>$usuario->getSobrenome(),
-            'email'=>$usuario->getEmail(),
-            'login'=>$usuario->getLogin(),
-            'senha'=>$usuario->getSenha()
-        );
-        
-        if(count($campos)>0){
-            
-            $usuario = array();
-            for($q=0;$q<count(array_keys($campos)); $q++){
-                $usuario[]='?';
-            }
-            $sql = "insert into usuario
-            (".implode(',',array_keys($campos)).")
-            values (".implode(',',$usuario).")";
-            
-            $sql = $this->banco->prepare($sql);
-            $sql->execute(array_values($campos));
-        }
-    }
-    
-    public function getTotalUsuarios() {
-        $sql = $this->banco->query("SELECT COUNT(*) as c FROM usuarios");
-        $row = $sql->fetch();
-        
-        return $row['c'];
-    }
-    
+    //Função que cadastra usuários
     public function cadastrar(Usuario $usuario) {
        
         try{
@@ -90,24 +62,26 @@ VALUES(:nome, :sobrenome, :email,:login, :senha)");
             
         }catch(PDOException $e){
             echo "ERRO ".$e->getMessage();
-            //exit;
+            
         }
         
     }
     
+    //Função identifica usuário e senha no banco
     public function verificalogon(Usuario $usuario) {
         $this->banco->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         
-        $sql = $this->banco->prepare("SELECT id,nome, sobrenome FROM usuario WHERE login = :login AND senha = :senha");
+        $sql = $this->banco->prepare("SELECT id,nome, sobrenome, login FROM usuario WHERE login = :login AND senha = :senha");
         $sql->bindValue(":login", $usuario->getLogin());
         $sql->bindValue(":senha", md5($usuario->getSenha()));
         $sql->execute();
         
         if($sql->rowCount() > 0) {
             $dado = $sql->fetch();
-            $_SESSION['login'] = $dado['id'];
+            $_SESSION['idUsuario'] = $dado['id'];
             $_SESSION['nome'] = $dado['nome'];
             $_SESSION['sobrenome'] = $dado['sobrenome'];
+            $_SESSION['login'] = $dado['login'];
             return true;
         } else {
             return false;
@@ -115,6 +89,7 @@ VALUES(:nome, :sobrenome, :email,:login, :senha)");
         
     }
     
+    //Função que verifica se já existe o e-mail cadastrado
     public function verificaEmail(Usuario $usuario) {
    
         $sql = $this->banco->prepare("SELECT email FROM usuario WHERE email = :email");
@@ -130,6 +105,7 @@ VALUES(:nome, :sobrenome, :email,:login, :senha)");
         
     }
     
+    //Função que verifica se já existe algum login com este mesmo nome
     public function verificaLogin(Usuario $usuario) {
         
         $sql = $this->banco->prepare("SELECT login FROM usuario WHERE login = :login");
