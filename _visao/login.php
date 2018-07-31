@@ -1,13 +1,40 @@
 
-<form method="GET" action="<?php echo BASE_URL; ?>InicioControle/validaLogon">
-<p><p>
-	<label for="login">Login:</label>
-	<input type="text" name="login" id="login" />
-	<br>
-	<label for="senha">Senha:</label>
-	<input type="password" name="senha" id="senha" />
-	<br>
-	<input type="submit" value="Entrar" />
-</form>
+<button type="button" id="botaoJogar" class="botao" onclick="aparecerLogin('login','botaoJogar')">INICIAR</button>
 
-	<a href="<?php echo BASE_URL; ?>InicioControle/cadastroUsuario">Cadastre-se</a>
+<div class="container">
+
+	<div class="fundoLogin" id="login" style="display: none;">	
+		<form method="post" action="<?php echo BASE_URL; ?>InicioControle/validaLogon">
+			<div class="col">
+				<div class="rol">
+					<h1>Futebol Americano</h1>
+						<hr>
+				</div>
+			</div>
+    		<div class="form-group">
+    			<input type="text" class="form-control" name="login" placeholder="Digite o Usuário">
+    		</div>
+    		<div class="form-group">
+    			<input type="password" class="form-control" name="senha" placeholder="Digite a Senha">
+    		</div>
+    		<div class="col">
+				<div class="rol">
+					<button type="submit" class="btn btn-primary">Entrar</button>
+					<a href="<?php echo BASE_URL; ?>InicioControle/cadastroUsuario">Cadastre-se</a>
+				</div>
+			</div>
+				<hr>
+    			<div class="col">
+					<div class="rol">
+					
+    					<audio controls autoplay loop >
+      						<source src="../_outros/_musicas/bensound-happyrock.mp3" type="audio/mpeg">
+    					</audio>
+    					<hr>
+						Instituto Federal São Paulo <br>Câmpus Hortolândia
+					</div>
+				</div>
+		</form>
+	</div>
+</div>
+<script type="text/javascript" src="../_outros/_js/scriptLogin.js"></script>

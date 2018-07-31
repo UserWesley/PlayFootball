@@ -1,5 +1,6 @@
 <?php
 
+//Classe que representa o controle sobre a classe time
 class TimeControle extends ControladorVisao {
     
     //Caso o usuário já esteja logado, ir pra tela de carregamento
@@ -13,7 +14,7 @@ class TimeControle extends ControladorVisao {
         }
     }
     
-    //Função para gerar 16 times e dividi-los em seus grupos
+    //Função para gerar 16 times e dividi-los em seus grupos, selecionando suas opções
     public function gerarTimes(){
         
         $nomesTime = array();
@@ -52,8 +53,10 @@ class TimeControle extends ControladorVisao {
             
             $timeDao->cadastrar($time);
             
+            //Recuperar o id do ultimo time registrado no campeonato pelo usuário
             $idTime = $timeDao->idUltimoTimeRegistrado($time);
            
+            //Gerar todos jogadores de cada time
             $jogadorControle = new JogadorControle();
             $jogadorControle->gerarJogador($idTime);
             

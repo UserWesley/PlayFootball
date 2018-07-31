@@ -1,6 +1,9 @@
 <?php
+
+//Classe de controle do jogador
 class JogadorControle extends ControladorVisao{
     
+    //Função para gerenciar a criação de jogadores
     public function gerarJogador($idTime){
         
         $jogadorDao = new JogadorDAO();
@@ -26,8 +29,8 @@ class JogadorControle extends ControladorVisao{
             $tackle = $jogadorFuncao->gerarTackle();
             $velocidade = $jogadorFuncao->gerarVelocidade();
             
-            echo "<p>Nome : ".$nome." Sobrenome :".$sobrenome." Posição : ".$posicao." Idade : ". $idade." Peso : ".$peso." Altura : ".$altura;
-            echo "<p>Agilidade : ".$agilidade." Chute : ".$chute." Força : ".$forca." Lançamento : ".$lancamento." Pegar : ".$pegar." Marcacao : ".$marcacao." Resistência :".$resistencia." Salto :".$salto." Velocidade : ".$velocidade." Tackle : ".$tackle;
+//            echo "<p>Nome : ".$nome." Sobrenome :".$sobrenome." Posição : ".$posicao." Idade : ". $idade." Peso : ".$peso." Altura : ".$altura;
+  //          echo "<p>Agilidade : ".$agilidade." Chute : ".$chute." Força : ".$forca." Lançamento : ".$lancamento." Pegar : ".$pegar." Marcacao : ".$marcacao." Resistência :".$resistencia." Salto :".$salto." Velocidade : ".$velocidade." Tackle : ".$tackle;
         
         
             $novoJogador= new Jogador(array('nome'=>$nome,

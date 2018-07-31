@@ -1,9 +1,12 @@
 <?php
 
+//Inicia sessão
 session_start();
 
+//carrega arquivo de conexão com o banco
 require('config.php');
 
+//Registra todas funções automaticamente, não será necessário os requires
 spl_autoload_register(function($class){
     
     if(file_exists('_controle/'.$class.'.php')) {
@@ -19,5 +22,6 @@ spl_autoload_register(function($class){
         require '_dao/'.$class.'.php';
     }
 });
+//inicia o sistema
 $nucleo = new Nucleo();
 $nucleo->iniciar();

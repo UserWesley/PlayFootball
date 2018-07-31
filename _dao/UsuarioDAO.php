@@ -7,41 +7,6 @@ class UsuarioDAO extends model{
         parent::__construct();
     }
     
-    //Função que obtem dados dos usuario
-    public function get($campos = array(), $where=array()){
-        $usuarios = array();
-        $valores = array();
-        if(count($campos) == 0){
-            $campos = array('*');
-            
-        }
-        
-        $sql = "SELECT ".implode(', ',$campos)." from usuario ";
-        
-        if(count($where) > 0){
-            $tabelas = array_keys($where);
-            $valores = array_values($where);
-            $comp = array();
-            
-            foreach ($tabelas as $tabela){
-                $comp[] = $tabela." = ?";
-            }
-            
-            $sql .= ' WHERE '.implode(' AND ', $comp);
-            //$sql .= implode("and", $comp);
-        }
-        $sql = $this->banco->prepare($sql);
-        $sql->execute($valores);
-        
-        if($sql->rowCount() >0){
-            foreach($sql->fetchAll() as $item){
-                $usuarios[] = new Usuario($item);
-            }
-        }
-        
-        return $usuarios;
-    }
-    
     //Função que cadastra usuários
     public function cadastrar(Usuario $usuario) {
        
@@ -67,7 +32,7 @@ VALUES(:nome, :sobrenome, :email,:login, :senha)");
         
     }
     
-    //Função identifica usuário e senha no banco
+    //Função identifica usuário e senha no banco, retornando sessão com atributos
     public function verificalogon(Usuario $usuario) {
         $this->banco->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         

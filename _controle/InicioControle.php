@@ -1,5 +1,6 @@
 <?php
 
+//Classe que controla sistema de criação de usuários e login
 class InicioControle extends ControladorVisao {
     
     //Caso o usuário já esteja logado, ir pra tela de carregamento
@@ -24,11 +25,11 @@ class InicioControle extends ControladorVisao {
         $usuarioDAO = new UsuarioDAO();
         $controlador = new ControladorVisao();
         $usuario = new Usuario(array(
-            'nome'=>$_GET['nome'],
-            'sobrenome'=>$_GET['sobrenome'],
-            'email'=>$_GET['email'],
-            'login'=>$_GET['login'],
-            'senha'=>$_GET['senha']
+            'nome'=>$_POST['nome'],
+            'sobrenome'=>$_POST['sobrenome'],
+            'email'=>$_POST['email'],
+            'login'=>$_POST['login'],
+            'senha'=>$_POST['senha']
         ));
         
         
@@ -43,15 +44,10 @@ class InicioControle extends ControladorVisao {
             echo "senha diferentes";
         }
         else {
-            if($usuarioDAO->cadastrar($usuario)){
-                echo "Cadastrado com Sucesso";
-                
-                
+            if($usuarioDAO->cadastrar($usuario)){                
                 $this->loadTemplate('login');
             }
             else {
-                echo "Cadastro Sem sucesso";
-                
                 $this->loadTemplate('cadastroUsuario');
             }
         }
@@ -63,13 +59,13 @@ class InicioControle extends ControladorVisao {
         $usuarioDAO = new UsuarioDAO();
         $controlador = new ControladorVisao();
         $usuario = new Usuario(array(
-            'login'=>$_GET['login'],
-            'senha'=>$_GET['senha']
+            'login'=>$_POST['login'],
+            'senha'=>$_POST['senha']
         ));
-        
+
         if($usuarioDAO->verificaLogon($usuario)){
-            
-            $campeonatoControle = new CampeonatoControle();
+
+            $campeonatoControle = new CampeonatoControle();                                                                                                                                                                                                                                                                                                                                                       
             $campeonatoControle->carregarJogosSalvos();
         }
         else{
@@ -79,10 +75,15 @@ class InicioControle extends ControladorVisao {
     
     //Função para desativar sessão, e voltar a tela de login
     public function deslogar(){
-        
+        //Limpar dados da sessão
         session_unset();
         
         $controlador = new ControladorVisao();
+        $this->loadTemplate('login');
+    } 
+    
+    //Função para chamar tela inicial de login
+    public function voltaTelaInicial(){                                                                                 
         $this->loadTemplate('login');
     }
 }

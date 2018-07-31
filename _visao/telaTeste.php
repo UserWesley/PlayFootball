@@ -1,1 +1,1 @@
-<?php $_SESSION['idCampeonato'];?>jogadores Criados
+<?php $_SESSION['idCampeonato'];?>jogos criados

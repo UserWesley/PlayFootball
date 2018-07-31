@@ -1,7 +1,9 @@
 <?php
 
+//Classe responsável pela incialização do sistema a partir da url 
 class Nucleo{
     
+    //Função principal da classe, responsável por extrair partes de url e separar funções e parametros
     public function iniciar(){
         
         $url = '/';
@@ -34,6 +36,7 @@ class Nucleo{
             $currentAction = 'index';
         }
         
+        //Se url não existir, será encaminhado para página não encontrada
         if(!file_exists('_controle/'.$currentController.'.php') || !method_exists($currentController, $currentAction)) {
             $currentController = 'PaginaNaoEncontradaControle';
             $currentAction = 'index';

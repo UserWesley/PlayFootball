@@ -13,15 +13,17 @@ class JogadorDAO extends model{
         try{
             $this->banco->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             
-            $sql = $this->banco->prepare("INSERT INTO jogador (nome, sobrenome,idade,peso,altura,agilidade,chute,
+            $sql = $this->banco->prepare("INSERT INTO jogador (nome, sobrenome,idade,peso,altura,posicao,agilidade,chute,
 forca,lancamento,marcacao,pegar,resistencia,salto,tackle,velocidade,time,campeonato)
-VALUES(:nome,:sobrenome,:idade,:peso,:altura,:agilidade,:chute,:forca,
+VALUES(:nome,:sobrenome,:idade,:peso,:altura,:posicao,:agilidade,:chute,:forca,
 :lancamento,:marcacao,:pegar,:resistencia,:salto,:tackle,:velocidade,:time,:campeonato)");
+            
             $sql->bindValue(":nome", $jogador->getNome());
             $sql->bindValue(":sobrenome", $jogador->getSobrenome());
             $sql->bindValue(":idade", $jogador->getIdade());
             $sql->bindValue(":peso", $jogador->getPeso());
             $sql->bindValue(":altura", $jogador->getAltura());
+            $sql->bindValue(":posicao", $jogador->getPosicao());
             $sql->bindValue(":agilidade", $jogador->getAgilidade());
             $sql->bindValue(":chute", $jogador->getChute());
             $sql->bindValue(":forca", $jogador->getForca());
@@ -35,6 +37,7 @@ VALUES(:nome,:sobrenome,:idade,:peso,:altura,:agilidade,:chute,:forca,
             $sql->bindValue(":time", $jogador->getTime());
             $sql->bindValue(":campeonato", $jogador->getCampeonato());
             $sql->execute();
+            
             return true;
             
         }catch(PDOException $e){
@@ -42,4 +45,42 @@ VALUES(:nome,:sobrenome,:idade,:peso,:altura,:agilidade,:chute,:forca,
         }
     }
     
+    //Consultar e retorno em um array todos jogadores de um time
+    public function buscarJogadorMeuTime(){
+        
+        try{
+            $consultaJogador = 'SELECT nome, sobrenome, idade,peso, altura, posicao,agilidade,
+                chute, forca, lancamento, pegar, marcacao, resistencia, salto, tackle, velocidade
+          	FROM Jogador WHERE time = ? ORDER BY posicao DESC';
+            
+            $preparaConsultaJogador = $this->banco->prepare($consultaJogador);
+            $preparaConsultaJogador->bindValue(1, $_SESSION["idTime"]);
+            $preparaConsultaJogador->execute();
+            
+            $result = $preparaConsultaJogador->setFetchMode(PDO::FETCH_NUM);
+            
+            while ($row = $preparaConsultaJogador->fetch()) {
+                
+                $jogadorTime[] = $row[0];
+                $jogadorTime[] = $row[1];
+                $jogadorTime[] = $row[2];
+                $jogadorTime[] = $row[3];
+                $jogadorTime[] = $row[4];
+                $jogadorTime[] = $row[5];
+                $jogadorTime[] = $row[6];
+                $jogadorTime[] = $row[7];
+                $jogadorTime[] = $row[8];
+                $jogadorTime[] = $row[9];
+                $jogadorTime[] = $row[10];
+                $jogadorTime[] = $row[11];
+                $jogadorTime[] = $row[12];
+                $jogadorTime[] = $row[13];
+                $jogadorTime[] = $row[14];
+                $jogadorTime[] = $row[15]; 
+            }
+        }catch(PDOException $e){
+            echo "ERRO ".$e->getMessage();
+        }
+        return $jogadorTime;
+    }
 }
