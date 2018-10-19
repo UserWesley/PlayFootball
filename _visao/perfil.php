@@ -1,2 +1,3 @@
 <h1>Perfil</h1>
-<?php echo "Usuário : ".$_SESSION['login']; ?>
+<?php echo "<h2>Usuário : ".$_SESSION['login']."<h2>"; ?>
+

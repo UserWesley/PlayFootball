@@ -87,4 +87,17 @@ VALUES(:nome, :ano, :usuario, :fase)");
         }
         return $jogosSalvos;
     }
+    
+    //FUnção para buscar rodada atual do campeonato
+    public function buscarRodadaAtualCampeonato(){
+        
+        $sql = $this->banco->prepare("SELECT fase FROM campeonato WHERE id = :campeonato");
+        $sql->bindValue(":campeonato", $_SESSION['idCampeonato']);
+        $sql->execute();
+        
+        while ($dado = $sql->fetch()) {
+            $rodadaCampeonato = $dado['fase'];
+        }
+        return $rodadaCampeonato;
+    }
 }

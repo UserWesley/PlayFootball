@@ -28,7 +28,7 @@
 					<div class="rol">
 					
     					<audio controls autoplay loop >
-      						<source src="../_outros/_musicas/bensound-happyrock.mp3" type="audio/mpeg">
+      						<source src="<?php echo BASE_URL; ?>_outros/_musicas/bensound-happyrock.mp3" type="audio/mpeg">
     					</audio>
     					<hr>
 						Instituto Federal São Paulo <br>Câmpus Hortolândia
@@ -37,4 +37,3 @@
 		</form>
 	</div>
 </div>
-<script type="text/javascript" src="../_outros/_js/scriptLogin.js"></script>

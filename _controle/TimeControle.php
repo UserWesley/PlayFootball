@@ -17,26 +17,31 @@ class TimeControle extends ControladorVisao {
     //Função para gerar 16 times e dividi-los em seus grupos, selecionando suas opções
     public function gerarTimes(){
         
-        $nomesTime = array();
-        
+        //Instanciar timeDao para acessar metodo cadastrar em operações abaixo
         $timeDao = new TimeDAO();
-        $funcoesTime = new Time();
         
-        $nomesTime = $funcoesTime->nomeTime();
+        //nome dos time
+        $dadosTime = new Time();
+        $nomesTime = $dadosTime->nomeTime();
         
+        //Criando 16 Time para o campeonato
         for($i=1;$i<=16;$i++){
             
-            if($i<=4){ $grupo=1;}
-            else if($i<=8){ $grupo=2;}
-            else if($i<=12){ $grupo=3;}
-            else if($i<=16){ $grupo=4;}
+            //Cadastrando os grupos
+            $grupo = $dadosTime->definirGrupo($i);
             
+            //atributos iniciais
             $torcida = 1000;
             $dinheiro = 10000;
             $patrocinio = 10000;
             
+            //Sorteando nome e após removendo, para que não haja dois times com os nomes iguais
+            $nome = $dadosTime->sorteaNomeTime($nomesTime);
+            unset($nomesTime[$nome[0]]);
+            
+            //Cadastrando time com os dados
             $time = new Time(array(
-                'nome'=>$i,
+                'nome'=>$nome[1],
                 'torcida'=>$torcida,
                 'vitoria'=>'0',
                 'ponto'=>'0',

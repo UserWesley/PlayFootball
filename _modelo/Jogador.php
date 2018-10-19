@@ -3,6 +3,7 @@
 //Classe que representa a entidade jogador
 class Jogador{
     
+    //Atributos da classe
     private $id;
     private $nome;
     private $sobrenome;
@@ -226,18 +227,66 @@ class Jogador{
     }
     
     //Lista com todas posições do futebol americano 
-    public function gerarPosicao(){
+    public function gerarPosicao($numeroJogador){
         $posicoes = array("QB"=>"Quarterback", "RB"=>"Running Back","WR"=>"Wide Receiver",
-            "TE"=>" Tight End","C"=>"Center","OG"=>"Offensive Guards Left",
-            "OG"=>"Offensive Guards Right","LT"=>"Tackle Left","RT"=>"Tackle Right"
+            "TE"=>" Tight End","C"=>"Center","OG"=>"Offensive Guards",
+            "LT"=>"Tackle Left","RT"=>"Tackle Right"
         ,"DE"=>"Defensive End","DT"=>"Defensive Tackle","MLB"=>"Middle/Inside Linebackers",
             "OLB"=>"Outside Linebackers","CB"=>"Cornerback","S"=>"Safety","P"=>"Punter",
-        "K"=>"Kicker");
+        "K"=>"Kicker","LS"=>"Long Snap");
+
+        //Ataque
+        if($numeroJogador < 3 ){//QB
+            $posicao = $posicoes["QB"];
+        }else if($numeroJogador < 6){//RB
+            $posicao = $posicoes["RB"];   
+        }else if($numeroJogador < 11){//WR
+            $posicao = $posicoes["WR"];
+        }else if($numeroJogador < 13){//TE
+            $posicao = $posicoes["TE"];
+        }else if($numeroJogador < 15){//C
+            $posicao = $posicoes["C"];
+        }else if($numeroJogador < 19){//OG L
+            $posicao = $posicoes["OG"];
+        }else if($numeroJogador < 21){//LT
+            $posicao = $posicoes["LT"];
+        }else if($numeroJogador < 23){//RT
+            $posicao = $posicoes["RT"];
+        }
         
-        $chave = array_rand($posicoes,1);
-        return $posicoes[$chave];
+        
+        //Defesa
+        else if($numeroJogador < 25){//DE
+            $posicao = $posicoes["DE"];
+        }else if($numeroJogador < 30){//DT
+            $posicao = $posicoes["DT"];
+        }else if($numeroJogador < 34){//MLB
+            $posicao = $posicoes["MLB"];
+        }else if($numeroJogador < 38){//OLB
+            $posicao = $posicoes["OLB"];
+        }else if($numeroJogador < 42){//CB
+            $posicao = $posicoes["CB"];
+        }else if($numeroJogador < 46){//FS SS S
+            $posicao = $posicoes["S"];
+            
+        //Especial
+        }else if($numeroJogador < 48){//P
+            $posicao = $posicoes["P"];
+        }else if($numeroJogador < 50){//K
+            $posicao = $posicoes["K"];
+        }else if($numeroJogador < 52){//LS
+            $posicao = $posicoes["LS"];
+        }
+        
+        return $posicao;
+    }
+    
+    //
+    public function selecionarPosicao(){
+        
     }
     //Funções Referentes as habilidades dos jogadores
+    
     //Gera e retorna um valor entre 1 e 99
     public function gerarAgilidade(){
         $agilidade = rand(1,99);

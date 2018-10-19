@@ -29,6 +29,7 @@
 
 		</tbody>
 	</table>
+</div>
 <h2>Grupo 2</h2>
 <div class="table-responsive">
     <table class="table">
@@ -58,7 +59,7 @@
 
 		</tbody>
 	</table>
-
+</div>
 <h2>Grupo 3</h2>
 <div class="table-responsive">
     <table class="table">
@@ -88,7 +89,7 @@
 
 		</tbody>
 	</table>
-
+</div>
 <h2>Grupo 4</h2>
 <div class="table-responsive">
     <table class="table">
@@ -118,6 +119,6 @@
 
 		</tbody>
 	</table>
-
+</div>
 
 

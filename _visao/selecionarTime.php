@@ -17,7 +17,7 @@
                 ?>
             </select>
             
-            <button type="submit" class="btn btn-primary" style="width:250px;">Carregar Jogo Selecionado</button>						
+            <button type="submit" class="btn btn-primary" style="width:250px;">Selecione seu time</button>						
 		</form>
 		
 		<hr>

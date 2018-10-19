@@ -120,21 +120,32 @@ class Time{
     
     //Função com lista de todos nomes de times disponiveis
     public function nomeTime(){
-        $nomeTime = array();
-        $nomeTime=("time1,time2,time3,time4,time5,time6,time7,time8,time9,time10,time11,time12,time13,
-time14,time15,time16");
+       
+        $nomeTime= array ("Passos","Araras","Hortolândia","Sumaré","Santos","Campinas","Paulinia","Santo André",
+                    "Sorocaba","Pedreira","Jaguariuna","Monte Mor","Sousas","Montes Claros","Piracicaba","Araraquara"," Rafard","Lorena");
         return $nomeTime;
     }
     
-    public function gerarTorcida(){
+    //Definirá em qual grupo cada time irá participar
+    public function definirGrupo($numeroTime){
         
-        return $torcida;
+        if($numeroTime<=4){ $grupo=1;}
+        else if($numeroTime<=8){ $grupo=2;}
+        else if($numeroTime<=12){ $grupo=3;}
+        else if($numeroTime<=16){ $grupo=4;}
+        
+        return $grupo;
     }
     
-    //Função que retorna todos os nome de grupos disponiveis em array
-    public function nomesGrupos(){
+    //Função que sorteará dentro de um array, um nome de um time.
+    public function sorteaNomeTime($nomeTime){
+        //Sorteio nome
+        $chave = array_rand($nomeTime,1);
         
-        return $grupos;
+        $dadosNomeTime[] = $chave;
+        $dadosNomeTime[] = $nomeTime[$chave];
+        
+        return $dadosNomeTime;
     }
 
 }

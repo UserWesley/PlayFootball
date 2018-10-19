@@ -102,7 +102,22 @@ class Jogo{
     {
         return $this->publico;
     }
-
     
-    
+    // Retorno qual indice do array, esta contido o time do usuario
+    public function buscarJogoUsuarioRodada($jogosRodada){
+        for($i=0;$i<=7;$i++){
+            $jogo = $jogosRodada[$i];
+            if($jogo[0] == $_SESSION['nomeTime']){
+                $key=$i;
+                $_SESSION['timeAdversario'] = $jogo[1];
+            }
+            else if($jogo[1] == $_SESSION['nomeTime']){
+                $key=$i;
+                $_SESSION['timeAdversario'] = $jogo[0];
+                
+            }
+            unset($jogo);
+        }
+        return $jogosRodada[$key];
+    }  
 }

@@ -1,0 +1,79 @@
+.row{
+	text-align: center;
+}
+.col{
+	text-align: center;
+}
+.campo{
+	
+	width:500px;
+	height:150px;
+	background-color: green;
+}
+
+h3{
+	font-size: 20px;
+	margin:0px;
+}
+h4{
+	font-size: 16px;
+	margin:1px;
+}
+h8{
+	font-size: 14px;
+	margin-top:0px;
+}
+.conteudo{
+	text-align: left:
+}
+.btn{
+	width:300px;
+	margin-top:5px;
+	margin-bottom:5px;
+	border-radius: 90px;
+}
+
+hr{
+	margin:1px;
+	border-color: black;
+}
+
+.placar{
+	text-align: center;
+	font-size:130px;
+	
+}
+.tituloInformacoes{
+	font-size:20px;
+}
+.rodada{
+	font-size:12px;
+	text-align: right;
+}
+th,td{
+	text-align:center;
+}
+.informacoes{
+	
+	background-color: #2e3436;
+	border-radius:30px;
+	border-color:black;
+	border:30px;
+	color:white;
+}
+.informacoes:hover{
+	background-color: #000000;
+	color:white;
+	
+	
+}
+.titulo{
+	font-size : 30px;
+	
+}
+.subtitulo{
+	background-color :#babdb6;
+}
+.conteudo{
+	background-color :#d3d7cf;
+}

@@ -1,3 +1,4 @@
+//Função para retirar div com botão jogar e aparecer tela de login
 function aparecerLogin(login,botaoJogar) {
     var fundoLogin = document.getElementById(login).style.display;
     var botao = document.getElementById(botaoJogar).style.display;

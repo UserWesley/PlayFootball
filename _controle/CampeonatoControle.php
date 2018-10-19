@@ -31,7 +31,7 @@ class CampeonatoControle extends ControladorVisao {
             'nome'=>$_POST['nomeCampeonato'],
             'ano'=>'2018',
             'usuario'=>$_SESSION['idUsuario'],
-            'fase'=>'0'
+            'fase'=>'1'
         ));
         $campeonatoDao = new CampeonatoDAO();
         

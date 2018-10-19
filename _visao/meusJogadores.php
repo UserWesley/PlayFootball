@@ -1,5 +1,5 @@
 
-<h1 class="text-center">Jogadores do meu Time </h1>
+<h1>Jogadores do meu Time </h1>
 
 <div class="table-responsive">
     <table class="table">

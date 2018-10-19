@@ -1,3 +1,4 @@
+//FUnção para funções toogle do menu do campeonato
 function aparecerMenu(menu,conteudo,botaoMenu) {
     var vMenu = document.getElementById(menu).style.display;
     var vBotaoMenu = document.getElementById(botaoMenu).innerHTML;

@@ -10,7 +10,6 @@ class JogoDAO extends model{
     //Função para cadastrar os jogos do campeonato
     public function cadastrar(Jogo $jogo) {
         
-        //echo $jogo->getTimeVisitante();
         try{
             $this->banco->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             
@@ -33,35 +32,54 @@ class JogoDAO extends model{
     }
     
     //Buscar jogos de rodadas do campeonato e retorna em uma array
-    public function buscarJogoRodada($grupo, $rodada){
-        ini_set('display_errors',1);
-        ini_set('display_startup_erros',1);
-        error_reporting(E_ALL);
+    public function buscarJogoRodada($rodada){
+        
         try{
             
-
             $this->banco->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            $sql = $this->banco->prepare("SELECT time1.nome, jogo.pontosFeitoTimeCasa, time2.nome,
-jogo.pontosFeitoTimeVisitante 
-FROM jogo,time as time1, time as time2
-WHERE jogo.grupo =:grupo and 
-jogo.campeonato =:campeonato and jogo.rodada =:rodada and time1.id = jogo.timeCasa and time2.id = jogo.timeVisitante ");
-            $sql->bindValue(":grupo", $grupo);
+            $sql = $this->banco->prepare(" SELECT timeCasa.nome as timecasa1, jogo.pontosFeitoTimeCasa, timeVisitante.nome as timeVisitante1, jogo.pontosFeitoTimeVisitante 
+FROM jogo, time as timeCasa, time as TimeVisitante WHERE jogo.campeonato = :campeonato and rodada = :rodada and jogo.timeCasa = timeCasa.id and jogo.TimeVisitante = TimeVisitante.id");
             $sql->bindValue(":campeonato", $_SESSION['idCampeonato']);
             $sql->bindValue(":rodada", $rodada);
             $sql->execute();
             
             while($row = $sql->fetch(PDO::FETCH_OBJ)){
-                $times[]=$row->timecasa.nome;
-                $times[]=$row->jogo.pontosfeitotimecasa;
-                $times[]=$row->timevisitante.nome;
-                $times[]=$row->jogo.pontosFeitotimevisitante;
+                $times[]=$row->timecasa1;
+                $times[]=$row->pontosfeitotimecasa;
+                $times[]=$row->pontosfeitotimevisitante;
+                $times[]=$row->timevisitante1;
+                
             }
-            
             return $times;
             
         }catch(PDOException $e){
             echo "ERRO ".$e->getMessage();
         }
+    }
+    
+    //Buscar jogos de rodadas do campeonato e retorna em uma array
+    public function buscarJogoRodadaArray($rodada){
+        
+        try{
+            
+            $this->banco->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $sql = $this->banco->prepare(" SELECT timeCasa.nome as timecasa1, jogo.pontosFeitoTimeCasa, timeVisitante.nome as timeVisitante1, jogo.pontosFeitoTimeVisitante
+FROM jogo, time as timeCasa, time as TimeVisitante WHERE jogo.campeonato = :campeonato and rodada = :rodada and jogo.timeCasa = timeCasa.id and jogo.TimeVisitante = TimeVisitante.id");
+            $sql->bindValue(":campeonato", $_SESSION['idCampeonato']);
+            $sql->bindValue(":rodada", $rodada);
+            $sql->execute();
+            
+            while($row = $sql->fetch(PDO::FETCH_OBJ)){
+                $times[]=$row->timecasa1;
+                $times[]=$row->timevisitante1;
+                $jogo[] = $times;
+                unset($times);
+            }
+            return $jogo;
+            
+        }catch(PDOException $e){
+            echo "ERRO ".$e->getMessage();
+        }
+        
     }
 }

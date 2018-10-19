@@ -7,12 +7,14 @@ class Nucleo{
     public function iniciar(){
         
         $url = '/';
+        
         if(isset($_GET['url'])) {
             $url .= $_GET['url'];
         }
         
         $params = array();
         
+        //Controle
         if(!empty($url) && $url != '/') {
             $url = explode('/', $url);
             array_shift($url);
@@ -20,6 +22,7 @@ class Nucleo{
             $currentController = $url[0];
             array_shift($url);
             
+            //Ação
             if(isset($url[0]) && !empty($url[0])) {
                 $currentAction = $url[0];
                 array_shift($url);
@@ -27,6 +30,7 @@ class Nucleo{
                 $currentAction = 'index';
             }
             
+            //Parametros
             if(count($url) > 0) {
                 $params = $url;
             }
@@ -44,6 +48,6 @@ class Nucleo{
         
         $c = new $currentController();
         
-        call_user_func_array(array($c, $currentAction), $params);
+        call_user_func_array(array($c, $currentAction), $params); 
     }   
 }

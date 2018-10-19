@@ -125,6 +125,27 @@ VALUES(:nome,:torcida,:vitoria,:ponto,:derrota,:empate,:dinheiro,:pontosFeitos,:
         return $time;
     }
     
+    //Esta função busca e retorna a torcida do time do usuário
+    public function buscarTorcida(){
+        
+        try{
+            $this->banco->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $sql = $this->banco->prepare("SELECT torcida FROM time WHERE id =:idTime and campeonato =:campeonato ");
+            $sql->bindValue(":idTime", $_SESSION['idTime']);
+            $sql->bindValue(":campeonato", $_SESSION['idCampeonato']);
+            $sql->execute();
+            
+            $dado = $sql->fetch();
+            $torcida= $dado['torcida'];
+            
+            return $torcida;
+            
+        }catch(PDOException $e){
+            echo "ERRO ".$e->getMessage();
+        }
+    }
+    
+    
     //Busca dinheiro do time
     public function buscarDinheiroMeuTime(){
         

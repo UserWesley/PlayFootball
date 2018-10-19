@@ -15,18 +15,17 @@ class JogoControle extends ControladorVisao{
         $timesGrupo3 = $timeDao->buscarTimeGrupo(3);
         $timesGrupo4 = $timeDao->buscarTimeGrupo(4);   
        
-        $this->cadastrarJogo($timesGrupo1);
-        $this->cadastrarJogo($timesGrupo2);
-        $this->cadastrarJogo($timesGrupo3);
-        $this->cadastrarJogo($timesGrupo4);
+        $this->cadastrarJogo($timesGrupo1,1);
+        $this->cadastrarJogo($timesGrupo2,2);
+        $this->cadastrarJogo($timesGrupo3,3);
+        $this->cadastrarJogo($timesGrupo4,4);
         
     }
     
     //Função responsável pelo controle de cadastro dos jogos de acordo com suas rodadas
-    public function cadastrarJogo($time){
+    public function cadastrarJogo($time,$grupo){
         
         $jogoDao = new JogoDAO();
-        $grupo = "grupo";
         
         //Rodada1
         $timeCasa = $time[0];
@@ -159,72 +158,6 @@ class JogoControle extends ControladorVisao{
             'tipo'=>$grupo,
             'rodada'=>6
         ));
-        $jogoDao->cadastrar($jogo);
-        
-    }
-        
-}
-
-        /*for($a=1;$a<=6;$a++){
-        
-        echo "Rodada".$a."<br>";
-        //Faz um copia do array
-        $timeGrupo1Copia = $timesGrupo1;
-        
-        do{
-            $y=1;
-            //Seleciona o timeCasa do primeiro jogo e após o remove
-            $i = array_rand($timeGrupo1Copia,1);
-            $timeCasa = $timeGrupo1Copia[$i];
-            unset($timeGrupo1Copia[$i]);
-            
-            
-            //Seleciona o timeVisitante do primeiro jogo e após o remove
-            $i = array_rand($timeGrupo1Copia,1);
-            $timeVisitante = $timeGrupo1Copia[$i];
-            unset($timeGrupo1Copia[$i]);
-            
-            $jogo = array($timeCasa,$timeVisitante);
-            
-            if(in_array(array($timeCasa,$timeVisitante), $todoJogo)){
-                $y=10;
-            }
-            else {
-                echo "Jogo -".$timeCasa."x".$timeVisitante;
-                echo "<p>";
-                
-                $todoJogo[] = $jogo;
-            }
-            //Seleciona o timeCasa do segundo jogo e após o remove
-            $i = array_rand($timeGrupo1Copia,1);
-            $timeCasa2 = $timeGrupo1Copia[$i];
-            unset($timeGrupo1Copia[$i]);
-            
-            //Seleciona o timeVisitante do segundo jogo e após o remove
-            $i = array_rand($timeGrupo1Copia,1);
-            $timeVisitante2 = $timeGrupo1Copia[$i];
-            unset($timeGrupo1Copia[$i]);
-            
-            $jogo = array($timeCasa2,$timeVisitante2);
-            
-            
-            //Verifica se o jogo já existe
-            if(in_array(array($timeCasa2,$timeVisitante2), $todoJogo)){
-                $y=10;
-            }
-            else{
-                echo "Jogo -".$timeCasa2."x".$timeVisitante2;
-                echo "<p>";
-                
-                $todoJogo[] = $jogo;
-            }
-        }while($y > 8);
-        }
-        
-        
-        //print_r($jogo);
-        
-        //print_r($todoJogo);
-        
-    }
+        $jogoDao->cadastrar($jogo);   
+    }       
 }

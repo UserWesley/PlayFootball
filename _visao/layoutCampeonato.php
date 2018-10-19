@@ -3,8 +3,8 @@
 	<head>
 		<meta charset="UTF-8"/>
 		<meta name="viewport" content="width=device-width, initial-scale=1,shrink-to-fit=no"/>
-		<link rel="stylesheet" href="../_outros/_css/bootstrap.min.css" />
-		<link rel="stylesheet" href="../_outros/_css/estiloMenuCampeonato.css" />
+		<link rel="stylesheet" href="<?php echo BASE_URL; ?>_outros/_css/bootstrap.min.css" />
+		<link rel="stylesheet" href="<?php echo BASE_URL; ?>_outros/_css/estiloMenuCampeonato.css" />
 		<title>Futebol Americano</title>
 		
 	</head>
@@ -51,7 +51,7 @@
           </li>
           
           <hr>
-          <a class="nav-link active" href="#"><img src="../_outros/_imagens/arrow-right.svg">Jogar</a>
+          <a class="nav-link active" href="<?php echo BASE_URL; ?>MenuCampeonatoControle/carregarTelaProximoJogo"><img src="../_outros/_imagens/arrow-right.svg">Jogar</a>
           <hr>														
           <p>
           <a class="nav-link" href="<?php echo BASE_URL; ?>InicioControle/deslogar"><img src="../_outros/_imagens/sign-out.svg">Sair</a>
@@ -60,9 +60,9 @@
 		<div class="conteudo" id="conteudo">
 			<?php $this->loadViewInTemplate($viewName, $viewData); ?>
 		</div>
-		<script type="text/javascript" src="../_outros/_js/scriptCampeonato.js"></script>
-		<script type="text/javascript" src="../_outros/_js/jquery-3.3.1.min.js"></script>
-		<script type="text/javascript" src="../_outros/_js/bootstrap.bundle.min.js"></script>
+		<script type="text/javascript" src="<?php echo BASE_URL; ?>_outros/_js/scriptCampeonato.js"></script>
+		<script type="text/javascript" src="<?php echo BASE_URL; ?>_outros/_js/jquery-3.3.1.min.js"></script>
+		<script type="text/javascript" src="<?php echo BASE_URL; ?>_outros/_js/bootstrap.bundle.min.js"></script>
 		
 
 	</body>
